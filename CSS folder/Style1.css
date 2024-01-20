@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+  }
+  body{
+    font-family: sans-serif;
+    overflow: hidden;
+    user-select: none;
+  }
+  nav .logo{
+    color: white;
+    font-size: 33px;
+    font-weight: bold;
+    line-height: 56px;
+    padding-left: 110px;
+    /* padding:0 70px; */
+  }
+  span{
+    color: black;
+  }
+  nav{
+    height: 56px;
+    background: #4e5a61;
+    box-shadow: 0 3px 15px rgba(0,0,0,.4);
+  }
+  nav ul{
+    float: right;
+    margin-right: 60px;
+  }
+  nav ul li{
+    display: inline-block;
+    /* line-height: 56px; */
+    /* margin: 0 6px; */
+  }
+  nav ul li a{
+    color: white;
+    display: block;
+    padding: 0 20px;
+    line-height: 56px;
+    font-size: 18px;
+    background: #4e5a61;
+    transition: .5s;
+    text-transform: uppercase;
+    /* border: 1px solid transparent;
+    border-radius: 5px; */
+  }
+  nav ul li a:hover,
+  nav ul li a.active{
+    color: #212121;
+    /* border: 1px solid white; */
+  }
+  
+  nav ul li a.active:hover{
+    color: white;
+  }
+  nav ul ul{
+    position: absolute;
+    /* top: 56px; */
+    border-top: 3px solid #23dbdb;
+    opacity: 0;
+    visibility: hidden;
+    top: 0px;
+    left: 77%;
+  }
+  nav ul li:hover > ul{
+    top: 56px;
+    opacity: 1;
+    visibility: visible;
+    transition: .3s linear;
+  }
+  nav ul ul li{
+    width: 150px;
+    display: list-item;
+    position: relative;
+    border-bottom: 1px solid white;
+    border-top: none;
+    
+    text-align: center;
+  }
+  nav ul ul li a{
+    padding: 0 8px;
+    line-height: 35px;
+  }
+  nav ul ul ul{
+    border-top: none;
+  }
+  nav ul ul ul li{
+    position: relative;
+    width:115px;
+    /* text-align: center; */
+     top: -45px;
+    left: 35px; 
+  }
+  nav ul ul ul li a{
+    padding: 0 10px;
+  }
+#D{
+    margin-left: 5px;
+}
+#SS{
+  margin-left: 5px;
+}
+#P{
+    margin-right: 6px;
+}
+#H{
+  margin-right: 6px;
+}

@@ -1,0 +1,249 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="/css/boot.css">
+  <title>Profile</title>
+</head>
+
+<body>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="secondary-bg" id="sidebar-wrapper">
+      <div class="sidebar-heading text-center py-4 fs-4 font-weight-bold text-uppercase border-bottom"><i
+          class="fas fa-user-secret mr-2"></i>File<span style="color: white;">Integrity</span></div>
+      <div class="list-group list-group-flush my-3">
+        <a href="/home" class="list-group-item list-group-item-action bg-transparent second-text font-weight-bold"><i
+            class="fas fa-home mr-2"></i>Home</a>
+        <a href="/dashboard"
+          class="list-group-item list-group-item-action bg-transparent second-text font-weight-bold"><i
+            class="fas fa-tachometer-alt mr-2"></i>Dashboard</a>
+        <% if(!user.isDoctor){ %>
+          <a href="/acceptreq"
+            class="list-group-item list-group-item-action bg-transparent second-text font-weight-bold"><i
+              class="fa fa-check mr-2"></i>Accept Request</a>
+          <% } %>
+            <% if(user.isDoctor){ %>
+              <a href="/generatekey"
+                class="list-group-item list-group-item-action bg-transparent second-text font-weight-bold"><i
+                  class="fa fa-key mr-2"></i>Generate Key</a>
+              <% } %>
+                <a href="/profile"
+                  class="list-group-item list-group-item-action bg-transparent second-text font-weight-bold active"><i
+                    class="fas fa-user mr-2"></i>Profile</a>
+                <a href="/logout"
+                  class="list-group-item list-group-item-action bg-transparent second-text font-weight-bold"><i
+                    class="fas fa-power-off mr-2"></i>Logout</a>
+      </div>
+    </div>
+    <!-- sidebar-wrapper -->
+    <!-- Page Content -->
+    <% if(!user.isDoctor){ %>
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+        <div class="d-flex align-items-center">
+          <h2 class="m-0">Doctor Profile:</h2>
+        </div>
+      </nav>
+      <div class="container-fluid bg-transparent rounded py-2 px-4">
+        <form action="/accept" method="POST">
+        <div class="form-row">
+          <div class="form-group col-md-3 font-weight-bold">
+            <label for="inputAddress">Name</label>
+            <input type="text" class="form-control" name="name" value="<%= doctor.name %>" readonly>
+          </div>
+          <div class="form-group col-md-3 font-weight-bold">
+            <label for="inputPassword4">Mobile No</label>
+            <input type="text" class="form-control" name="mobileNumber" value="<%= doctor.mobileNumber %>" readonly>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6 font-weight-bold">
+            <label for="inputPassword4">Email</label>
+            <input class="form-control" type="text" name="email" value="<%= doctor.email %>" readonly>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6 font-weight-bold">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" name="address1" value="<%= doctor.address.address1 %>" readonly>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-2 font-weight-bold">
+            <label for="inputCity">City</label>
+            <input type="text" class="form-control" name="city" value="<%= doctor.address.city %>" readonly>
+          </div>
+          <div class="form-group col-md-2 font-weight-bold">
+            <label for="inputState">State</label>
+            <input type="text" class="form-control" name="state" value="<%= doctor.address.state %>" readonly>
+          </div>
+          <div class="form-group col-md-2 font-weight-bold">
+            <label for="inputZip">Country</label>
+            <input type="text" class="form-control" name="country" value="<%= doctor.address.country %>" readonly>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6 font-weight-bold">
+            <label for="exampleFormControlTextarea1">Specializtion</label>
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"
+              readonly><%= doctor.description %></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6 font-weight-bold">
+            <label for="inputAddress">Enter Password:</label>
+            <input type="password" class="form-control" name="password" required>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary bg-dark" name="Accept">Accept Request</button>
+        </form>
+      </div>
+    </div>
+    <% } %>
+    <% if(user.isDoctor){ %>
+      <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+          <div class="d-flex align-items-center">
+            <h2 class="m-0">Patient Profile:</h2>
+          </div>
+        </nav>
+        <div class="container-fluid bg-transparent rounded py-2 px-4">
+          <div class="row">
+            <div class="col-md-6">
+              <form action="/accept" method="POST">
+                <div class="form-row">
+                  <div class="form-group col-md-6 font-weight-bold">
+                    <label for="inputAddress">Name</label>
+                    <input type="text" class="form-control" name="name" value="<%= patient.name %>" readonly>
+                  </div>
+                  <div class="form-group col-md-6 font-weight-bold">
+                    <label for="inputPassword4">Mobile No</label>
+                    <input type="text" class="form-control" name="mobileNumber" value="<%= patient.mobileNumber %>" readonly>
+                  </div>
+                </div>
+        
+                <div class="form-row">
+                  <div class="form-group col-md-12 font-weight-bold">
+                    <label for="inputPassword4">Email</label>
+                    <input class="form-control" type="text" name="email" value="<%= patient.email %>" readonly>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12 font-weight-bold">
+                    <label for="inputAddress">Address</label>
+                    <input type="text" class="form-control" name="address1" value="<%= patient.address.address1 %>" readonly>
+                  </div>
+                </div>
+        
+                <div class="form-row">
+                  <div class="form-group col-md-4 font-weight-bold">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" name="city" value="<%= patient.address.city %>" readonly>
+                  </div>
+                  <div class="form-group col-md-4 font-weight-bold">
+                    <label for="inputState">State</label>
+                    <input type="text" class="form-control" name="state" value="<%= patient.address.state %>" readonly>
+                  </div>
+                  <div class="form-group col-md-4 font-weight-bold">
+                    <label for="inputZip">Country</label>
+                    <input type="text" class="form-control" name="country" value="<%= patient.address.country %>" readonly>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12 font-weight-bold">
+                    <label for="exampleFormControlTextarea1">Description</label>
+                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"
+                      readonly><%= patient.description %></textarea>
+                  </div>
+                </div>
+                  <% if(file.length>0){ %>
+                    <div class="form-row">
+                      <div class="form-group col-md-12 font-weight-bold">
+                        <label for="inputAddress">Enter passphrase for the private key:</label>
+                        <input type="password" class="form-control" name="passphrase" required>
+                      </div>
+                    </div>
+                  <% } %>
+                
+                <button class="btn btn-secondary bg-dark" name="Accept">Submit</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+              <div class="text-left">
+                <% if(file.length>0){ %>
+                <h4 class="m-0 px-3 ">Files:</h4>
+                <% }else{ %>
+                <h4 class="m-0 py-3 px-3">No Files found!</h4>
+                <% } %>
+              </div>
+              <div class="container-fluid">
+                <div class="row">
+                    <% file.forEach((row,index)=>{ %>
+                  <div class="col-md-4 my-3">
+                    <div class="card-deck">
+                      <div class="card shadow-sm">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= row.fileOriginalName %></h5>
+                          <p class="card-text"></p>
+                          <a href="/files/<%= row.fileName %>" class="btn btn-secondary text-center">Download</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% }) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+
+
+      <% } %>
+    <!-- /#page-content-wrapper -->
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    var el = document.getElementById("wrapper");
+    var toggleButton = document.getElementById("menu-toggle");
+
+    toggleButton.onclick = function () {
+      el.classList.toggle("toggled");
+    };
+  </script>
+
+
+  <!-- <% if(locals.msg){ %>
+    <script>
+      alert("<%= msg %>");
+      if (window.location.search.includes('msg=')) {
+        const urlWithoutMsg = window.location.origin + window.location.pathname;
+        history.replaceState({}, document.title, urlWithoutMsg);
+      }
+    </script>
+    <% } %> -->
+</body>
+
+</html>
